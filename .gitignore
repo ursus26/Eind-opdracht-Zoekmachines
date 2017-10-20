@@ -1,5 +1,6 @@
 # Files to ignore
 data/
+elasticsearch*/
 
 # Created by https://www.gitignore.io/api/java,linux,python,windows,jupyternotebook
 
