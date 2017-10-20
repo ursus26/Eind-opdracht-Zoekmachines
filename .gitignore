@@ -1,3 +1,5 @@
+# Files to ignore
+data/
 
 # Created by https://www.gitignore.io/api/java,linux,python,windows,jupyternotebook
 

@@ -1,9 +1,0 @@
-Orgineel eerste 2 vragen:
-{"questionId": "1", "description": "En waar kunnen we dan het best gaan schaatsen?", "question": "Kunnen we volgende week weer schaatsen op natuurijs?", "userId": "1", "date": "2009-01-28 09:49:57", "categoryId": "32"}
-{"questionId": "2", "description": "", "question": "Wat is het lekkerste recept voor boerenkool?", "userId": "1", "date": "2009-01-29 09:32:04", "categoryId": "69"}
-
-Nieuw, eerste 2 vragen:
-{ "create": { "_index": "goedevragen", "_type": "vraag", "_id": "1"}}
-{ "description": "En waar kunnen we dan het best gaan schaatsen?", "question": "Kunnen we volgende week weer schaatsen op natuurijs?", "userId": "1", "date": "2009-01-28 09:49:57", "categoryId": "32"}
-{ "create": { "_index": "goedevragen", "_type": "vraag", "_id": "2"}}
-{ "description": "", "question": "Wat is het lekkerste recept voor boerenkool?", "userId": "1", "date": "2009-01-29 09:32:04", "categoryId": "69"}
