@@ -103,7 +103,7 @@ def view_question():
         question_answers.append(listitem)
 
 
-    stopwoorden = set(stopwords.words('Dutch'))
+    stopwoorden = set(stopwords.words('dutch'))
     wordcloudList = []
     question = r_question.json()[u'hits']['hits'][0]
     for x in question_answers:
