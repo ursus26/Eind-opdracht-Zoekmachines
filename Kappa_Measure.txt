@@ -1,0 +1,14 @@
+<Query> prijs uitlaten honden</Query>
+<Destription> 'ik wil weten hoeveel mensen ongeveer vragen voor het uitlaten van honden. De prijs moet in de vraag staan, samen met de leeftijd en het gaat over het uitlaten van honden'</Destription>
+
+<Query> Hoge gebouwen Nederland</Query>
+<Destription> 'Ik wil weten welke hoge gebouwen er in Nederland staan. In de vraag moet een gebouw staan met de vraag naar de hoogte, of een vraag naar de hoogte van een gebouw. '</Destription>
+
+<Query> beste games</Query>
+<Destription> ik ben benieuwd naar welke games goed worden ontvangen door de community. De post moet een videogame omschrijven of vragen naar een wat populair is onder videogames.</Destription>
+
+<Query> tentamen leren</Query>
+<Destription> Ik wil graag weten hoe ik het mij het beste kan voorbereiden op een tentamen. De vraag heeft te maken met hoe je goed kunt leren voor een tentamen.</Destription>
+
+<Query> Xbox AND (playstation OR PS) </Query>
+DescriptionL ik wil weten wat beter is, een xbox of een playstation. Ik de vraag of description moet het gaan over de verschillen van playstation en Xbox. </Destription>

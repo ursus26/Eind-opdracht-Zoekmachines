@@ -8,6 +8,39 @@
 
 <body>
 
+  <div class="container" style="margin-top:50px; margin-bottom: 50px;">
+ <h2> Timeline </h2>
+  <canvas id="myChart" width="40px" height="10px"></canvas>
+  <script>
+  var ctx = document.getElementById("myChart").getContext('2d');
+  var d = {{ time_y }}
+  var x_label = {{ time_x }}
+
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: x_label,
+      datasets: [{
+        label: 'hits',
+        data: d,
+
+        backgroundColor: "rgba(0,100,255,0.5)"
+      }]
+    },
+    options: {
+      scales: {
+          yAxes: [{
+              ticks: {
+                  beginAtZero: true
+              }
+          }]
+      }
+  }
+  });
+  </script>
+
+  </div>
+
 {% block body %}
 {% for entry in queryQuestions %}
     {% if 'question' in entry._source %}
@@ -35,28 +68,7 @@
 {% endif %}
 
 
-<div class="container" style="height: 100px !important;">
 
-<canvas id="myChart" width="200" height="100"></canvas>
-<script>
-var ctx = document.getElementById("myChart").getContext('2d');
-var d = {{ time_y }}
-var x_label = {{ time_x }}
-
-var myChart = new Chart(ctx, {
-  type: 'line',
-  data: {
-    labels: x_label,
-    datasets: [{
-      label: 'hits',
-      data: d,
-      backgroundColor: "rgba(0,100,255,0.5)"
-    }]
-  }
-});
-</script>
-
-</div>
 
 </body>
 </html>

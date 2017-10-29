@@ -3,6 +3,8 @@ import requests
 import json
 import sys
 import collections
+from nltk.corpus import stopwords
+import re
 
 app = Flask(__name__)
 category_dict = {}
@@ -38,7 +40,7 @@ def search():
             }
         }
     }
-    
+
     # Check if a category is selected.
     cat = request.args.get('category')
     if cat != "Geen":
@@ -101,13 +103,16 @@ def view_question():
         question_answers.append(listitem)
 
 
+    stopwoorden = set(stopwords.words('Dutch'))
     wordcloudList = []
     question = r_question.json()[u'hits']['hits'][0]
     for x in question_answers:
         for y in x[u'_source'][u'answer'].split(' '):
-            wordcloudList.append(y)
+            if y not in stopwoorden:
+                woord = re.sub(r'[^\w\s]', '', y)
+                wordcloudList.append(woord)
     wordcloud = collections.Counter(wordcloudList)
-    wordcloudIndex = sorted(wordcloud.items(), key=lambda x: x[1])
+    wordcloudIndex = sorted(wordcloud.items(), key=lambda x: x[1], reverse=True)
 
     return render_template('view_question.html', question=question, question_answers=question_answers, wordcloud=wordcloudIndex)
 
