@@ -10,7 +10,7 @@ https://github.com/ursus26/Eind-opdracht-Zoekmachines/wiki
 ### Dependencies
 pip install flask <br>
 pip install ntlk <br>
-Also install nltk stopwords dutch (if code gernates error, change 'dutch' to 'Dutch') <br>
+Also install nltk stopwords dutch (if code generates error, change 'dutch' to 'Dutch') <br>
 elasticsearch 5.6.3
 
 ### Data
