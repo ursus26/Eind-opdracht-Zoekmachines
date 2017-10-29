@@ -1,0 +1,112 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<br><br>
+
+<section class="container">
+          <div class="row clearfix">
+		<div class="col-md-12 column">
+			<div class="panel panel-default">
+				<div class="panel-heading" style= "background-color:rgba(0,100,255,0.5)">
+					<section class="panel-title">
+                      <time class="pull-right">
+                      <i class="fa fa-calendar"></i>{{ question._source.date }}
+                      </time>
+					</section>
+				</div>
+				<section class="row panel-body">
+					<section class="col-md-12">
+                      <h2>{{ question._source.question }}</h2>
+                      {{ question._source.description }}
+
+                      <br><br>
+          <div style="width: 250px; font-family: Arial, Verdana, Helvetica;">
+          {% if wordcloud %}  
+            {% if wordcloud[0][0] %}
+            <a  style="font-size: 15px; color: #999999; text-decoration: none;">{{wordcloud[0][0]}}</a>
+            {% endif %}
+            {% if wordcloud[1][0] %}
+            <a  style="font-size: 16px; color: #ff7600; text-decoration: none;">{{wordcloud[1][0]}}</a>
+            {% endif %}
+            {% if wordcloud[2][0] %}
+            <a  style="font-size: 12; color: #999999; text-decoration: none;">{{wordcloud[2][0]}}</a>
+            {% endif %}
+            {% if wordcloud[3][0] %}
+            <a  style="font-size: 22px; color: #039faf; text-decoration: none;">{{wordcloud[3][0]}}</a>
+            {% endif %}
+            {% if wordcloud[4][0] %}
+            <a  style="font-size: 14px; color: #ff7600; text-decoration: none;">{{wordcloud[4][0]}}</a>
+            {% endif %}
+            {% if wordcloud[5][0] %}
+            <a  style="font-size: 19px; color: #87a800; text-decoration: none;">{{wordcloud[5][0]}}</a>
+            {% endif %}
+            {% if wordcloud[6][0] %}
+            <a  style="font-size: 15px; color: #999999; text-decoration: none;">{{wordcloud[6][0]}}</a>
+            {% endif %}
+            {% if wordcloud[7][0] %}
+            <a  style="font-size: 16px; color: #ff7600; text-decoration: none;">{{wordcloud[7][0]}}</a>
+            {% endif %}
+            {% if wordcloud[8][0] %}
+            <a  style="font-size: 12; color: #999999; text-decoration: none;">{{wordcloud[8][0]}}</a>
+            {% endif %}
+            {% if wordcloud[9][0] %}
+            <a  style="font-size: 22px; color: #039faf; text-decoration: none;">{{wordcloud[9][0]}}</a>
+            {% endif %}
+            {% if wordcloud[10][0] %}
+            <a  style="font-size: 14px; color: #ff7600; text-decoration: none;">{{wordcloud[10][0]}}</a>
+            {% endif %}
+            {% if wordcloud[11][0] %}
+            <a  style="font-size: 19px; color: #87a800; text-decoration: none;">{{wordcloud[11][0]}}</a>
+            {% endif %}
+            {% if wordcloud[12][0] %}
+            <a  style="font-size: 12; color: #999999; text-decoration: none;">{{wordcloud[12][0]}}</a>
+            {% endif %}
+            {% if wordcloud[13][0] %}
+            <a  style="font-size: 22px; color: #039faf; text-decoration: none;">{{wordcloud[13][0]}}</a>
+            {% endif %}
+            {% if wordcloud[14][0] %}
+            <a  style="font-size: 14px; color: #ff7600; text-decoration: none;">{{wordcloud[14][0]}}</a>
+            {% endif %}
+            {% if wordcloud[15][0] %}
+            <a  style="font-size: 19px; color: #87a800; text-decoration: none;">{{wordcloud[15][0]}}</a>
+            {% endif %}
+          {% endif %}
+          </div>
+</section>
+</section>
+
+
+{% for entry in question_answers %}
+<section class="container">
+          <div class="row clearfix">
+		<div class="col-md-11 column">
+			<div class="panel panel-default">
+				<div class="panel-heading" style= "background-color:rgba(2,2,2,0.4)">
+					<section class="panel-title">
+                      <time class="pull-right">
+                      <i class="fa fa-calendar"></i> {{ entry._source.date }}
+                      </time>
+					</section>
+				</div>
+				<section class="row panel-body">
+					<section class="col-md-12">
+                      <h3>{{ entry._source.answer }}</h3>
+
+				<div class="panel-footer">
+        <h4>
+				{{ entry._source.thumbsUp}} <i class="glyphicon glyphicon-thumbs-up" style='color:green'></i>
+        {{ entry._source.thumbsDown }} <i class="glyphicon glyphicon-thumbs-down" style='color:red'></i>
+      </h4>
+  </div>
+</section>
+</section>
+</section>
+  {% endfor %}
+
+</body>
+</html>

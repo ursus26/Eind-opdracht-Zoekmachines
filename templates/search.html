@@ -1,9 +1,62 @@
 <html>
 <head>
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
 </head>
 
 <body>
+
+{% block body %}
+{% for entry in queryQuestions %}
+    {% if 'question' in entry._source %}
+        <div class="card text-center">
+
+             <div class="card-body">
+                <h2 class="card-title">{{ entry._source.question }}</h2>
+                <h5 class="card-text">{{ entry._source.description }}</h5>
+                <br>
+                <a href="{{ url_for('view_question', q=entry._source.questionId) }}" class="btn btn-primary">Ga naar vraag</a>
+
+            </div>
+            <div class="card-footer text-muted">
+                {{ entry._source.date }}
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}
+{% endblock %}
+
+{% if not queryQuestions %}
+<div class="alert alert-danger">
+  <h1><strong>Sorry,</strong> could not find anything matching: "{{ query }}"</h1>
+</div>
+{% endif %}
+
+
+<div class="container" style="height: 100px !important;">
+
+<canvas id="myChart" width="200" height="100"></canvas>
+<script>
+var ctx = document.getElementById("myChart").getContext('2d');
+var d = {{ time_y }}
+var x_label = {{ time_x }}
+
+var myChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: x_label,
+    datasets: [{
+      label: 'hits',
+      data: d,
+      backgroundColor: "rgba(0,100,255,0.5)"
+    }]
+  }
+});
+</script>
+
+</div>
 
 </body>
 </html>
