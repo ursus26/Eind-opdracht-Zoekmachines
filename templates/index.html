@@ -22,12 +22,29 @@
                 </div>
                 <div class="col-md-12">
                     <div class="radio">
-                        <label><input type="radio" name="optradio" value="title">Search in title</label>
+                        <label class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" name="search_option_title" value="title" checked>
+                            <span class="custom-control-description">Search in title</span>
+                        </label>
                     </div>
                     <div class="radio">
-                        <label><input type="radio" name="optradio" value="description">Search in description</label>
+                        <label class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" name="search_option_description" value="description" checked>
+                            <span class="custom-control-description">Search in description</span>
+                        </label>
                     </div>
                 </div>
+
+                <div>
+                    <select name="category">
+                        <option value="Geen">Geen</option
+                        {% for cat in categories %}
+                            <option value="{{ cat }}">{{ cat }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+
             </form>
           <small  class="form-text text-muted">Magie, Wij weten ook niet hoe het werkt. </small>
         </div>

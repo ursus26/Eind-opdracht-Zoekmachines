@@ -5,33 +5,32 @@ import sys
 import collections
 
 app = Flask(__name__)
-
+category_dict = {}
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', categories=category_dict.keys())
 
 
 @app.route('/search', methods=['GET'])
 def search():
-
-    print(request.args.get('optradio'))
-
-    # Create a query
-# Set the fields we search in.
+    # Set the fields we search in.
     fields = []
-    if request.args.get('optradio'):
-        if request.args.get('optradio') == "title":
-            fields.append("question")
-        else:
-            fields.append("description")
+    if request.args.get('search_option_title'):
+        fields.append("question")
 
-    else:
+    if request.args.get('search_option_description'):
         fields.append("description")
-        fields.append("title")
+
+    # If nothing is selected then search in all the fields.
+    if len(fields) == 0:
+        fields.append("question")
+        fields.append("description")
 
     # Create a query
     query = {
+        "from" : 0,
+        "size" : 10000,
         "query": {
             "multi_match": {
                 "query": request.args.get('q'),
@@ -39,6 +38,29 @@ def search():
             }
         }
     }
+    
+    # Check if a category is selected.
+    cat = request.args.get('category')
+    if cat != "Geen":
+        query = {
+            "from" : 0,
+            "size" : 10000,
+            "query": {
+                "bool": {
+                    "must": {
+                        "multi_match": {
+                            "query": request.args.get('q'),
+                            "fields": fields
+                        }
+                    },
+                    "filter": {
+                        "term": {
+                            "categoryId": str(category_dict[cat])
+                        }
+                    }
+                }
+            }
+        }
 
     # Send a search request to elasticsearch and get a response
     payload = json.dumps(query)
@@ -46,6 +68,8 @@ def search():
 
     # create list of dicts with all information of a question
     queryQuestions = []
+
+    print("----")
     print(r.json())
     for listitem in r.json()[u'hits']['hits']:
         queryQuestions.append(listitem)
@@ -57,6 +81,8 @@ def search():
 @app.route('/view_question', methods=['GET'])
 def view_question():
     query = {
+        "from" : 0,
+        "size" : 10000,
         "query": {
             "query_string": {
                 "query": request.args.get('q'),
@@ -111,5 +137,28 @@ def timeline(query_result):
     print((x, y))
     return x, y
 
+
+def get_categories():
+    if len(category_dict) > 0:
+        return
+
+    query = {
+        "from" : 0,
+        "size" : 10000,
+        "query": {
+            "match_all": {}
+        }
+    }
+
+    # Send a search request to elasticsearch and get a response
+    payload = json.dumps(query)
+    r = requests.post("http://localhost:9200/goedevragen/categories/_search", data=payload).json()
+
+    # print(r)
+    for i in r['hits']['hits']:
+        category_dict[i['_source']['category']] = i['_source']['categoryId']
+
+
 if __name__ == '__main__':
+    get_categories()
     app.run(debug=True)
